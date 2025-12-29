@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Subscriptions</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Choose your subscription</h1>
+    <p class="subtitle">
+        Choose a plan
+    </p>
+
+    <div class="subscription-list">
+
+        <div class="subscription-card">
+            <h2>Basic</h2>
+
+            <p class="description">
+                HD streaming<br>
+                1 user<br>
+                No offline downloads
+            </p>
+
+            <p class="price">€7.99 / month</p>
+
+            <a class="btn"
+               th:href="@{/subscriptions/configure(type=BASIC)}">
+                Select Basic
+            </a>
+        </div>
+
+        <div class="subscription-card highlighted">
+            <h2>Standard</h2>
+
+            <p class="description">
+                Full HD streaming<br>
+                Up to 2 users<br>
+                Offline downloads included
+            </p>
+
+            <p class="price">€11.99 / month</p>
+
+            <a class="btn"
+               th:href="@{/subscriptions/configure(type=STANDARD)}">
+                Select Standard
+            </a>
+        </div>
+
+        <div class="subscription-card">
+            <h2>Premium</h2>
+
+            <p class="description">
+                Ultra HD (4K) streaming<br>
+                Up to 4 users<br>
+                Offline downloads included
+            </p>
+
+            <p class="note">
+                Premium content packages available as add-ons
+            </p>
+
+            <p class="price">€15.99 / month</p>
+
+            <a class="btn"
+               th:href="@{/subscriptions/configure(type=PREMIUM)}">
+                Select Premium
+            </a>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

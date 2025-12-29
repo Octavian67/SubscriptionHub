@@ -1,10 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Subscriptions Hub</title>
+    <title>Home</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<p>Home page</p>
+
+<div class="container">
+    <h1>Streaming Service</h1>
+
+    <!-- NO ACTIVE SUBSCRIPTION -->
+    <div th:if="${currentSubscription == null}" class="empty-state">
+        <p>You do not have an active subscription.</p>
+
+        <a href="/test/subscriptions" class="btn">
+            Create subscription
+        </a>
+    </div>
+
+    <!-- ACTIVE SUBSCRIPTION -->
+    <div th:if="${currentSubscription != null}" class="subscription-card">
+
+        <h2>Your current subscription</h2>
+
+        <p class="plan-name"
+           th:text="${currentSubscription.name}">
+            Standard
+        </p>
+
+        <p class="description"
+           th:text="${currentSubscription.description}">
+            Full HD streaming on up to 2 users
+        </p>
+
+        <ul class="summary-list">
+            <li>
+                Video quality:
+                <strong th:text="${currentSubscription.videoQuality}">
+                    FULL_HD
+                </strong>
+            </li>
+
+            <li>
+                Max users:
+                <strong th:text="${currentSubscription.maxUsers}">
+                    2
+                </strong>
+            </li>
+
+            <li>
+                Offline downloads:
+                <strong
+                        th:text="${currentSubscription.offline ? 'Yes' : 'No'}">
+                    Yes
+                </strong>
+            </li>
+        </ul>
+
+        <a href="/subscriptions" class="btn">
+            Modify subscription
+        </a>
+    </div>
+</div>
+
 </body>
 </html>

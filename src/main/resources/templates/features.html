@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Extra Features</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Customize your subscription</h1>
+
+    <p class="subtitle">
+        Selected plan:
+        <strong th:text="${subscriptionType}">STANDARD</strong>
+    </p>
+
+    <form th:action="@{/subscriptions/summary}"
+          th:object="${handoff}"
+          method="post">
+
+        <input type="hidden" th:field="*{type}"/>
+
+        <div class="features-list">
+
+            <div class="feature-item"
+                 th:each="feature : ${availableFeatures}">
+
+                <label>
+                    <input type="checkbox"
+                           th:field="*{features}"
+                           th:value="${feature}"/>
+
+                    <span th:text="${feature}">
+                        SUPERIOR_VIDEO_QUALITY
+                    </span>
+                </label>
+            </div>
+
+            <div class="feature-item included"
+                 th:each="feature : ${includedFeatures}">
+                <span th:text="${feature}">OFFLINE_DOWNLOADS</span>
+                <span class="badge">included</span>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3>Billing period</h3>
+
+            <label>
+                <input type="radio"
+                       th:field="*{period}"
+                       value="MONTHLY"/>
+                Monthly
+            </label>
+
+            <label>
+                <input type="radio"
+                       th:field="*{period}"
+                       value="YEARLY"/>
+                Yearly (15% discount)
+            </label>
+        </div>
+
+        <div class="section">
+            <label>
+                <input type="checkbox"
+                       th:field="*{student}"/>
+                Student discount (extra 10%)
+            </label>
+        </div>
+
+        <button type="submit" class="btn">
+            Continue to summary
+        </button>
+
+    </form>
+</div>
+
+</body>
+</html>

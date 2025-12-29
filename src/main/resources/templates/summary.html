@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Subscription Summary</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Subscription Summary</h1>
+
+    <div class="summary-section">
+        <h2 th:text="${subscription.name}">Standard</h2>
+        <p class="description"
+           th:text="${subscription.description}">
+            Full HD streaming on up to 2 users
+        </p>
+    </div>
+
+    <div class="summary-section">
+        <h3>Included features</h3>
+
+        <ul class="summary-list">
+            <li>
+                Video quality:
+                <strong th:text="${subscription.videoQuality}">
+                    FULL_HD
+                </strong>
+            </li>
+
+            <li>
+                Max users:
+                <strong th:text="${subscription.maxUsers}">
+                    2
+                </strong>
+            </li>
+
+            <li>
+                Offline downloads:
+                <strong
+                        th:text="${subscription.canDownloadOffline() ? 'Yes' : 'No'}">
+                    Yes
+                </strong>
+            </li>
+        </ul>
+    </div>
+
+    <div class="summary-section"
+         th:if="${!subscription.contentPackages.isEmpty()}">
+        <h3>Content packages</h3>
+
+        <ul class="summary-list">
+            <li th:each="pkg : ${subscription.contentPackages}"
+                th:text="${pkg}">
+                SPORTS
+            </li>
+        </ul>
+    </div>
+
+    <div class="summary-section">
+        <h3>Billing</h3>
+
+        <ul class="summary-list">
+            <li>
+                Period:
+                <strong th:text="${handoff.period}">
+                    YEARLY
+                </strong>
+            </li>
+
+            <li th:if="${handoff.student}">
+                Student discount applied
+            </li>
+        </ul>
+    </div>
+
+    <div class="summary-section price-box">
+        <h3>Total price</h3>
+        <p class="final-price">
+            €<span th:text="${#numbers.formatDecimal(finalPrice, 1, 2)}">
+                0.00
+            </span>
+        </p>
+    </div>
+
+    <div class="actions">
+        <a href="/subscriptions" class="btn secondary">
+            Start over
+        </a>
+    </div>
+</div>
+
+</body>
+</html>

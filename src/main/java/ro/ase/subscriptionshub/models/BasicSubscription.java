@@ -1,5 +1,8 @@
 package ro.ase.subscriptionshub.models;
 
+import java.util.Collections;
+import java.util.Set;
+
 public class BasicSubscription implements Subscription{
     @Override
     public SubscriptionType getType() {
@@ -13,7 +16,7 @@ public class BasicSubscription implements Subscription{
 
     @Override
     public String getDescription() {
-        return "HD streaming on 1 device";
+        return "HD streaming on 1 user";
     }
 
     @Override
@@ -22,12 +25,22 @@ public class BasicSubscription implements Subscription{
     }
 
     @Override
-    public int getMaxDevices() {
+    public int getMaxUsers() {
         return 1;
     }
 
     @Override
-    public boolean supportsUltraHD() {
+    public VideoQuality getVideoQuality() {
+        return VideoQuality.HD;
+    }
+
+    @Override
+    public boolean canDownloadOffline() {
         return false;
+    }
+
+    @Override
+    public Set<ContentPackage> getContentPackages() {
+        return Collections.emptySet();
     }
 }

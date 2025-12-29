@@ -1,5 +1,7 @@
 package ro.ase.subscriptionshub.models;
 
+import java.util.Set;
+
 public interface Subscription {
     SubscriptionType getType();
 
@@ -9,7 +11,11 @@ public interface Subscription {
 
     double getMonthlyCost();
 
-    int getMaxDevices();
+    int getMaxUsers();
 
-    boolean supportsUltraHD();
+    VideoQuality getVideoQuality();
+
+    boolean canDownloadOffline();
+
+    Set<ContentPackage> getContentPackages();
 }
