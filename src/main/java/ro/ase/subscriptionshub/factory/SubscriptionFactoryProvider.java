@@ -1,6 +1,6 @@
 package ro.ase.subscriptionshub.factory;
 
-import ro.ase.subscriptionshub.models.SubscriptionType;
+import ro.ase.subscriptionshub.data.models.SubscriptionType;
 
 import java.util.EnumMap;
 import java.util.Map;

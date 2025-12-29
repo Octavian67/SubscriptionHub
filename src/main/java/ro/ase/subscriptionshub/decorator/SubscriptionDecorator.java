@@ -1,9 +1,9 @@
 package ro.ase.subscriptionshub.decorator;
 
-import ro.ase.subscriptionshub.models.ContentPackage;
-import ro.ase.subscriptionshub.models.Subscription;
-import ro.ase.subscriptionshub.models.SubscriptionType;
-import ro.ase.subscriptionshub.models.VideoQuality;
+import ro.ase.subscriptionshub.data.models.ContentPackage;
+import ro.ase.subscriptionshub.data.models.Subscription;
+import ro.ase.subscriptionshub.data.models.SubscriptionType;
+import ro.ase.subscriptionshub.data.models.VideoQuality;
 
 import java.util.Set;
 

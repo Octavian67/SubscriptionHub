@@ -1,6 +1,6 @@
 package ro.ase.subscriptionshub.decorator;
 
-import ro.ase.subscriptionshub.models.Subscription;
+import ro.ase.subscriptionshub.data.models.Subscription;
 
 public class OfflineDownloadFeature extends SubscriptionDecorator{
     public OfflineDownloadFeature(Subscription base) {

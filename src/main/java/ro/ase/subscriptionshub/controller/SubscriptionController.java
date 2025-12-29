@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ro.ase.subscriptionshub.models.*;
+import ro.ase.subscriptionshub.data.models.*;
 import ro.ase.subscriptionshub.service.SubscriptionService;
 import ro.ase.subscriptionshub.utils.SubscriptionUtils;
 
@@ -26,9 +26,7 @@ public class SubscriptionController {
     @GetMapping("/")
     public String home(Model model) {
 
-        // TEMPORARY PLACEHOLDER
-        // later: fetched from H2
-        SubscriptionViewModel currentSubscription = null;
+        SubscriptionViewModel currentSubscription = subscriptionService.getSubscription();
 
         model.addAttribute("currentSubscription", currentSubscription);
         return "index";
@@ -72,7 +70,6 @@ public class SubscriptionController {
         model.addAttribute("subscription", result.getSubscription());
         model.addAttribute("finalPrice", result.getFinalPrice());
         model.addAttribute("handoff", handoff);
-
         return "summary";
     }
 

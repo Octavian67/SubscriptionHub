@@ -1,7 +1,7 @@
 package ro.ase.subscriptionshub.decorator;
 
-import ro.ase.subscriptionshub.models.ContentPackage;
-import ro.ase.subscriptionshub.models.Subscription;
+import ro.ase.subscriptionshub.data.models.ContentPackage;
+import ro.ase.subscriptionshub.data.models.Subscription;
 
 import java.util.HashSet;
 import java.util.Set;

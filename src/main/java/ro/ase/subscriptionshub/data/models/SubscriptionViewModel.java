@@ -1,4 +1,4 @@
-package ro.ase.subscriptionshub.models;
+package ro.ase.subscriptionshub.data.models;
 
 public class SubscriptionViewModel {
     private SubscriptionType type;

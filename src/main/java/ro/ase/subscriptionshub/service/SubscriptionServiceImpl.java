@@ -1,9 +1,12 @@
 package ro.ase.subscriptionshub.service;
 
 import org.springframework.stereotype.Service;
+import ro.ase.subscriptionshub.data.entity.SubscriptionEntity;
+import ro.ase.subscriptionshub.data.models.*;
+import ro.ase.subscriptionshub.data.repository.SubscriptionRepository;
 import ro.ase.subscriptionshub.decorator.*;
 import ro.ase.subscriptionshub.factory.SubscriptionFactoryProvider;
-import ro.ase.subscriptionshub.models.*;
+import ro.ase.subscriptionshub.mapper.SubscriptionMapper;
 import ro.ase.subscriptionshub.strategy.MonthlyPricingStrategy;
 import ro.ase.subscriptionshub.strategy.PricingStrategy;
 import ro.ase.subscriptionshub.strategy.StudentDiscountPricingStrategy;
@@ -11,22 +14,48 @@ import ro.ase.subscriptionshub.strategy.YearlyPricingStrategy;
 
 @Service
 public class SubscriptionServiceImpl implements SubscriptionService {
+
+    private final SubscriptionMapper subscriptionMapper;
+
+    private final SubscriptionRepository subscriptionRepository;
+
+    public SubscriptionServiceImpl(SubscriptionMapper subscriptionMapper, SubscriptionRepository subscriptionRepository) {
+        this.subscriptionMapper = subscriptionMapper;
+        this.subscriptionRepository = subscriptionRepository;
+    }
+
     @Override
     public SubscriptionResult createSubscription(SubscriptionHandoff handoff) {
+        try {
+            subscriptionRepository.deleteAll();
+            Subscription subscription = createBaseSubscription(handoff);
 
-        Subscription subscription = createBaseSubscription(handoff);
+            validateExtraFeatures(subscription, handoff);
 
-        validateExtraFeatures(subscription, handoff);
+            subscription = applyExtraFeatures(subscription, handoff);
 
-        subscription = applyExtraFeatures(subscription, handoff);
+            PricingStrategy strategy = buildPricingStrategy(handoff);
 
-        PricingStrategy strategy = buildPricingStrategy(handoff);
+            double finalPrice =
+                    strategy.calculatePrice(subscription.getMonthlyCost());
 
-        double finalPrice =
-                strategy.calculatePrice(subscription.getMonthlyCost());
+            SubscriptionResult subscriptionResult = new SubscriptionResult(subscription, finalPrice);
 
+            SubscriptionEntity subscriptionEntity = subscriptionMapper.toEntity(subscriptionResult.getSubscription());
+            subscriptionRepository.save(subscriptionEntity);
 
-        return new SubscriptionResult(subscription, finalPrice);
+            return subscriptionResult;
+
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    @Override
+    public SubscriptionViewModel getSubscription() {
+
+        SubscriptionEntity subscriptionEntity = subscriptionRepository.findAll().stream().findFirst().orElse(null);
+        return subscriptionMapper.toViewModel(subscriptionEntity);
     }
 
     private Subscription createBaseSubscription(SubscriptionHandoff request) {

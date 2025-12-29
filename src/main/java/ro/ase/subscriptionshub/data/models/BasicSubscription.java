@@ -1,42 +1,42 @@
-package ro.ase.subscriptionshub.models;
+package ro.ase.subscriptionshub.data.models;
 
 import java.util.Collections;
 import java.util.Set;
 
-public class PremiumSubscription implements Subscription{
+public class BasicSubscription implements Subscription{
     @Override
     public SubscriptionType getType() {
-        return SubscriptionType.PREMIUM;
+        return SubscriptionType.BASIC;
     }
 
     @Override
     public String getName() {
-        return "Premium";
+        return "Basic";
     }
 
     @Override
     public String getDescription() {
-        return "Ultra HD streaming on up to 4 users";
+        return "HD streaming on 1 user";
     }
 
     @Override
     public double getMonthlyCost() {
-        return 15.99;
+        return 7.99;
     }
 
     @Override
     public int getMaxUsers() {
-        return 4;
+        return 1;
     }
 
     @Override
     public VideoQuality getVideoQuality() {
-        return VideoQuality.ULTRA_HD;
+        return VideoQuality.HD;
     }
 
     @Override
     public boolean canDownloadOffline() {
-        return true;
+        return false;
     }
 
     @Override

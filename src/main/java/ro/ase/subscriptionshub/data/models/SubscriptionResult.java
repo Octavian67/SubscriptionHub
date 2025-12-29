@@ -1,6 +1,4 @@
-package ro.ase.subscriptionshub.models;
-
-import ro.ase.subscriptionshub.models.Subscription;
+package ro.ase.subscriptionshub.data.models;
 
 public class SubscriptionResult {
     private Subscription subscription;

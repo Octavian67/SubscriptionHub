@@ -1,8 +1,8 @@
 package ro.ase.subscriptionshub.utils;
 
 import org.springframework.stereotype.Component;
-import ro.ase.subscriptionshub.models.FeatureType;
-import ro.ase.subscriptionshub.models.SubscriptionType;
+import ro.ase.subscriptionshub.data.models.FeatureType;
+import ro.ase.subscriptionshub.data.models.SubscriptionType;
 
 import java.util.Set;
 

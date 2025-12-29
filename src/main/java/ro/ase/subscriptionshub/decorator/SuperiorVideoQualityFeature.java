@@ -1,7 +1,7 @@
 package ro.ase.subscriptionshub.decorator;
 
-import ro.ase.subscriptionshub.models.Subscription;
-import ro.ase.subscriptionshub.models.VideoQuality;
+import ro.ase.subscriptionshub.data.models.Subscription;
+import ro.ase.subscriptionshub.data.models.VideoQuality;
 
 public class SuperiorVideoQualityFeature extends SubscriptionDecorator{
     public SuperiorVideoQualityFeature(Subscription base) {
