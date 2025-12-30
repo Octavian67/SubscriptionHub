@@ -11,10 +11,12 @@
     <h1>Streaming Service</h1>
 
     <!-- NO ACTIVE SUBSCRIPTION -->
-    <div th:if="${currentSubscription == null}" class="empty-state">
+    <div th:if="${currentSubscription == null}" class="empty-state"
+         style="text-align:center; margin:50px auto; font-size:1.2rem; line-height:1.6;">
+
         <p>You do not have an active subscription.</p>
 
-        <a href="/test/subscriptions" class="btn">
+        <a href="/subscriptions" class="btn">
             Create subscription
         </a>
     </div>
