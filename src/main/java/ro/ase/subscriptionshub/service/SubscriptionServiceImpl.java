@@ -7,6 +7,7 @@ import ro.ase.subscriptionshub.data.repository.SubscriptionRepository;
 import ro.ase.subscriptionshub.decorator.*;
 import ro.ase.subscriptionshub.factory.SubscriptionFactoryProvider;
 import ro.ase.subscriptionshub.mapper.SubscriptionMapper;
+import ro.ase.subscriptionshub.observer.publisher.SubscriptionCreationPublisher;
 import ro.ase.subscriptionshub.strategy.MonthlyPricingStrategy;
 import ro.ase.subscriptionshub.strategy.PricingStrategy;
 import ro.ase.subscriptionshub.strategy.StudentDiscountPricingStrategy;
@@ -19,9 +20,12 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
     private final SubscriptionRepository subscriptionRepository;
 
-    public SubscriptionServiceImpl(SubscriptionMapper subscriptionMapper, SubscriptionRepository subscriptionRepository) {
+    private final SubscriptionCreationPublisher subscriptionCreationPublisher;
+
+    public SubscriptionServiceImpl(SubscriptionMapper subscriptionMapper, SubscriptionRepository subscriptionRepository, SubscriptionCreationPublisher subscriptionCreationPublisher) {
         this.subscriptionMapper = subscriptionMapper;
         this.subscriptionRepository = subscriptionRepository;
+        this.subscriptionCreationPublisher = subscriptionCreationPublisher;
     }
 
     @Override
@@ -43,6 +47,8 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
             SubscriptionEntity subscriptionEntity = subscriptionMapper.toEntity(subscriptionResult.getSubscription());
             subscriptionRepository.save(subscriptionEntity);
+
+            subscriptionCreationPublisher.notifyCreated(subscription);
 
             return subscriptionResult;
 
